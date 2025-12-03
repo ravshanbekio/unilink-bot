@@ -5,6 +5,7 @@ text_translations = {
             "We\\'re an all\\-in\\-one platform where students can apply to multiple universities in one place — saving time, money, and stress\\.\n"
             "From basic to premium plans, we offer the tools and support you need to succeed\\."
         ),
+        "url":"https://unilinkedu.com/universities/",
         "application_details": "📄 Application Details",
         "code": "Code",
         "status": "Status",
@@ -25,6 +26,7 @@ text_translations = {
             "Biz \\- bir nechta universitetlarga bir joyda ariza topshirish imkonini beruvchi yagona platformamiz — bu esa vaqtni, pulni va asabni tejaydi\\.\n"
             "Oddiydan tortib premiumgacha bo\\lgan rejalar orqali biz sizga kerakli vositalar va yordamni taqdim etamiz\\."
         ),
+        "url":"https://unilinkedu.com/uz/universities/",
         "application_details": "📄 Ariza Tafsilotlari",
         "code": "Kod",
         "status": "Holat",
@@ -45,6 +47,7 @@ text_translations = {
             "Мы \\- единая платформа, где студенты могут подать заявки сразу в несколько университетов в одном месте — экономя время, деньги и нервы\\.\n"
             "От базовых до премиум планов мы предлагаем все инструменты и поддержку для вашего успеха\\."
         ),
+        "url":"https://unilinkedu.com/ru/universities/",
         "application_details": "📄 Детали заявки",
         "code": "Код",
         "status": "Статус",
@@ -65,6 +68,7 @@ text_translations = {
             "우리는 학생들이 여러 대학교에 한 곳에서 동시에 지원할 수 있는 올인원 플랫폼으로 — 시간, 비용, 스트레스를 절약할 수 있습니다\\.\n"
             "기본 플랜부터 프리미엄 플랜까지, 성공을 위한 모든 도구와 지원을 제공합니다\\."
         ),
+        "url":"https://unilinkedu.com/kr/universities/",
         "application_details": "📄 지원서 세부 정보",
         "code": "코드",
         "status": "상태",
@@ -89,6 +93,7 @@ command_translations = {
         "check": "📄 Check your application",
         "universities": "🎓 See universities",
         "about": "ℹ️ About us",
+        "next": "⏭️ Next",
         "back": "⬅ Back"
     },
     "uz": {
@@ -98,6 +103,7 @@ command_translations = {
         "check": "📄 Arizangizni tekshirish",
         "universities": "🎓 Universitetlarni ko‘rish",
         "about": "ℹ️ Biz haqimizda",
+        "next": "⏭️ Keyingi",
         "back": "⬅ Orqaga"
     },
     "ru": {
@@ -107,6 +113,7 @@ command_translations = {
         "check": "📄 Проверить заявку",
         "universities": "🎓 Смотреть университеты",
         "about": "ℹ️ О нас",
+        "next": "⏭️ Следующий",
         "back": "⬅ Назад"
     },
     "kr": {
@@ -116,6 +123,7 @@ command_translations = {
         "check": "📄 신청서 확인",
         "universities": "🎓 대학교 보기",
         "about": "ℹ️ 소개",
+        "next": "⏭️ 다음",
         "back": "⬅ 뒤로"
     }
 }
@@ -126,6 +134,7 @@ all_commands = [
     "📄 Check your application",
     "🎓 See universities",
     "ℹ️ About us",
+    "⏭️ Next",
     "⬅ Back",
 
     "📌 Asosiy menyu",
@@ -133,6 +142,7 @@ all_commands = [
     "📄 Arizangizni tekshirish",
     "🎓 Universitetlarni ko‘rish",
     "ℹ️ Biz haqimizda",
+    "⏭️ Keyingi",
     "⬅ Orqaga",
 
     "📌 Главное меню",
@@ -140,6 +150,7 @@ all_commands = [
     "📄 Проверить заявку",
     "🎓 Смотреть университеты",
     "ℹ️ О нас",
+    "⏭️ Следующий",
     "⬅ Назад",
 
     "📌 메인 메뉴",
@@ -147,5 +158,6 @@ all_commands = [
     "📄 신청서 확인",
     "🎓 대학교 보기",
     "ℹ️ 소개",
+    "⏭️ 다음",
     "⬅ 뒤로"
 ]

@@ -6,13 +6,13 @@ load_dotenv()
 
 URL = os.getenv("API_URL")
 
-def get_universities():
+def get_universities(page: int, perPage: int):
     params = {
-        "page":1,
-        "perPage":20
+        "page":page,
+        "perPage":perPage
     }
     response = requests.get(f"{URL}/university/all", params=params).json()
-    return response
+    return {"response":response, "total":response['meta']['total']}
 
 def check_application_status(application_code):
     response = requests.get(f"{URL}/application/status/{application_code}").json()

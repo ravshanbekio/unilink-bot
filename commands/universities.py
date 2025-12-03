@@ -1,5 +1,6 @@
 from aiogram import Router, F
 import aiohttp
+import math
 import tempfile
 from aiogram.types import Message, ReplyKeyboardMarkup, KeyboardButton, FSInputFile, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery  
 from aiogram.fsm.context import FSMContext
@@ -11,7 +12,7 @@ from translation import command_translations, text_translations, all_commands
 universities_router = Router()
 
 # Example data
-universities = get_universities()
+universities = get_universities(page=1, perPage=10)
 
 async def download_and_send_photo(url: str, message, caption, kb):
     async with aiohttp.ClientSession() as session:
@@ -47,29 +48,50 @@ def back_kb(lang: str):
     )
 
 # Universities list keyboard
-def universities_kb(lang: str):
-    universities = get_universities()
+def universities_kb(lang: str, next_page: int, page: int = 1):
+    universities = get_universities(page=page, perPage=10)
+    
+    keyboard = [
+            *[[KeyboardButton(text=u[f"name_{lang}"])] for u in universities["response"]["data"]],
+        ]
+    
+    if next_page > 1:
+        keyboard.append(
+            [KeyboardButton(text=command_translations[lang]["next"])]
+        )
+        
+    keyboard.append(
+        [KeyboardButton(text=command_translations[lang]["back"])]
+    )
     return ReplyKeyboardMarkup(
-        keyboard=[
-            *[[KeyboardButton(text=u[f"name_{lang}"])] for u in universities["data"]],
-            [KeyboardButton(text=command_translations[lang]["back"])]
-        ],
+        keyboard=keyboard,
         resize_keyboard=True
     )
 
 # See universities command
 @universities_router.message(F.text.in_(
-    [v["universities"] for v in command_translations.values()]
+    [v["universities"] for v in command_translations.values()] +
+    [v["next"] for v in command_translations.values()]
 ))
 async def show_universities(message: Message, state: FSMContext):
     data = await state.get_data()
     lang = data.get("lang")
 
+    pageExists = data.get("page")
+    if pageExists is not None:
+        pageExists += 1
+    
+    pageExists = 1
+        
+    universities = get_universities(page=1, perPage=10)
+    page = math.ceil(universities["total"] / 10)
+    
+    await state.update_data(page=pageExists)
     await state.update_data(current_menu="uni_list")
     await message.answer(
         text_translations[lang]["select_uni"],
         parse_mode="MarkdownV2",
-        reply_markup=universities_kb(lang)
+        reply_markup=universities_kb(lang=lang, next_page=page, page=pageExists)
     )
 
 # --- BACK handler (inline button) ---
@@ -88,7 +110,9 @@ async def university_details(message: Message, state: FSMContext):
     data = await state.get_data()
     lang = data.get("lang")
 
-    universities = get_universities()
+    page = data.get("page")
+    print(page)
+    universities = get_universities(page=1, perPage=10)
     uni = next(
         (u for u in universities.get("data", []) if u[f"name_{lang}"] == message.text),
         None
@@ -106,12 +130,12 @@ async def university_details(message: Message, state: FSMContext):
             [
                 InlineKeyboardButton(
                     text=text_translations[lang]["details"],
-                    url=f"https://unilinkedu.com/universities/{uni['univer_id']}"
+                    url=f"{text_translations[lang]}{uni['univer_id']}"
                 )
             ],
             [
                 InlineKeyboardButton(
-                    text="🔙 Back", 
+                    text=command_translations[lang]["back"], 
                     callback_data="back_to_list"
                 )
             ]

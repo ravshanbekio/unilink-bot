@@ -21,6 +21,8 @@ async def go_back(message: Message, state: FSMContext):
     data = await state.get_data()
     lang = data.get("lang") 
     
+    await state.update_data(page=None)
+    
     keyboard = ReplyKeyboardMarkup(
         keyboard=[
             [KeyboardButton(text=f"{command_translations[lang]['universities']}")],
